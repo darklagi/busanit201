@@ -5,6 +5,7 @@ import com.example.todosample.logic.Repository;
 import com.example.todosample.logic.RepositoryImpl;
 import com.example.todosample.model.User;
 
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -23,8 +24,8 @@ public class MainPresenter
     public void login(User user) {
         this.repository.login(user)
                 .subscribeOn(Schedulers.io())
-                .doOnError(throwable -> {
-
+                .onErrorResumeNext(throwable -> {
+                    
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((Consumer<User>) u -> {
