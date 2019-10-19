@@ -25,7 +25,7 @@ public class MainPresenter
         this.repository.login(user)
                 .subscribeOn(Schedulers.io())
                 .onErrorResumeNext(throwable -> {
-                    
+
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((Consumer<User>) u -> {
