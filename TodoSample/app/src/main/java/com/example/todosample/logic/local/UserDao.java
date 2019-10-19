@@ -17,8 +17,8 @@ import io.reactivex.Single;
 public interface UserDao {
     // TODO Query, Insert, Update
     // Query list
-    @Query("select * from user order by no desc")
-    Observable<List<User>> fetchItems();
+    @Query("select * from user where email = :email")
+    Single<User> login(String email);
 
     // Query item
     @Query("select * from user where no = :no")

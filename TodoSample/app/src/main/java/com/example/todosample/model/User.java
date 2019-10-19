@@ -12,6 +12,7 @@ public class User implements Serializable {
     String name;
     String email;
     String password;
+    boolean login;
 
     public int getNo() {
         return no;
@@ -45,6 +46,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -52,6 +61,7 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", login=" + login +
                 '}';
     }
 }

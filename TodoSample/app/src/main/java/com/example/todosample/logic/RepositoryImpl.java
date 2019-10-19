@@ -4,6 +4,7 @@ import com.example.todosample.base.BasePresenter;
 import com.example.todosample.logic.local.LocalDataSourceImpl;
 import com.example.todosample.model.User;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public class RepositoryImpl <T> implements Repository {
@@ -25,7 +26,12 @@ public class RepositoryImpl <T> implements Repository {
     }
 
     @Override
-    public Single<String> login(User user) {
+    public Single<User> login(User user) {
+        return localDataSource.login(user);
+    }
 
+    @Override
+    public Completable signUp(User user) {
+        return localDataSource.signUp(user);
     }
 }

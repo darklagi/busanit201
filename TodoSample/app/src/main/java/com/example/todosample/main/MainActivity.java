@@ -1,9 +1,8 @@
 package com.example.todosample.main;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.todosample.R;
 import com.example.todosample.base.BaseActivity;
@@ -27,14 +26,10 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
         user.setPassword(et_password.getText().toString());
 
         mPresenter.login(user);
-        /*
-        Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-        startActivity(intent);
-         */
     }
 
     @OnClick(R.id.tv_signup)
-    void signup(){
+    void signUp(){
         /*
         Intent intent = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(intent);
@@ -46,30 +41,21 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     }
 
     @Override
+    public void loginDone(User user) {
+        if(user.isLogin()){
+            /*
+            Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+            startActivity(intent);
+            */
+        }
+        else{
+            Toast.makeText(this, "비밀번호가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -23,41 +23,17 @@ public class MainPresenter
     public void login(User user) {
         this.repository.login(user)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((Consumer<String>) s -> {
-                    //뭔가 화면으로 출력 로직
-                });
+                .doOnError(throwable -> {
 
-    }
-    /*
-    @Override
-    public void fetchItems() {
-        this.repository.fetchItems()
-                .subscribeOn(Schedulers.io())
+                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((Consumer<List<Item>>) items -> {
-                    view.fetchItemsDone(items);
+                .subscribe((Consumer<User>) u -> {
+                    if(user.getPassword().equals(u.getPassword())){
+                        u.setLogin(true);
+                    }
+                    else {
+                        u.setLogin(false);
+                    }
                 });
     }
-
-    @Override
-    public void fetchItem(int no) {
-        this.repository.fetchItem(no)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((Consumer<Item>) item -> {
-                    view.showDetail(item);
-                });
-    }
-
-    @Override
-    public void fetchItemsDone(List<Item> items) {
-        view.fetchItemsDone(items);
-    }
-
-    @Override
-    public void showDetail(Item item) {
-        view.showDetail(item);
-    }
-    */
 }

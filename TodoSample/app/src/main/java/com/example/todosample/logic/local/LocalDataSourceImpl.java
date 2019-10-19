@@ -2,6 +2,10 @@ package com.example.todosample.logic.local;
 
 import com.example.todosample.logic.DataSource;
 import com.example.todosample.logic.Repository;
+import com.example.todosample.model.User;
+
+import io.reactivex.Completable;
+import io.reactivex.Single;
 
 public class LocalDataSourceImpl implements DataSource {
     Repository repository;
@@ -20,16 +24,13 @@ public class LocalDataSourceImpl implements DataSource {
         this.repository = repository;
     }
 
-    /*
-    // Fetch Items
     @Override
-    public Maybe<List<Item>> fetchItems() {
-        return appDatabase.getItemDao().fetchItems();
+    public Single<User> login(User user) {
+        return appDatabase.getUserDao().login(user.getEmail());
     }
 
     @Override
-    public Maybe<Item> fetchItem(int no) {
-        return appDatabase.getItemDao().fetchItem(no);
+    public Completable signUp(User user) {
+        return appDatabase.getUserDao().signUp(user);
     }
-     */
 }
